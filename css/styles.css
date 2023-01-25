@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Biryani:wght@200&family=Dosis&family=Fugaz+One&family=Philosopher&family=Poor+Story&family=Rubik+Dirt&family=Source+Sans+Pro&family=Space+Mono&family=Special+Elite&display=swap');
+
 /* CSS Reset */
 
 /*
@@ -26,6 +28,7 @@
   body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    font-family: 'Biryani', sans-serif;
   }
   /*
     6. Improve media defaults
@@ -79,6 +82,13 @@
 .currentTemp {
     font-size: 5rem;
     padding: 0rem;
+    font-family: 'Philosopher', sans-serif;
+}
+
+.timeText {
+    font-size: 5rem;
+    font-family: 'Philosopher', sans-serif;
+    margin: 0rem;
 }
 
 .tempThoughOutDay {
@@ -99,6 +109,9 @@
 
 .todayText {
     font-variant-caps: small-caps;
+    font-size: 2rem;
+    margin: 0rem;
+    margin-top: -.8rem;
 }
 
 .dayColumn {
@@ -118,4 +131,9 @@
 .weatherIcons {
     max-width: 2.5rem;
     height: auto;
+}
+
+.navbar-brand {
+    font-size: 2rem;
+    font-family: 'Philosopher', sans-serif;
 }
