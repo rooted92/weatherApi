@@ -69,9 +69,9 @@
 }
 
 .currentTempData {
-    max-width: 22rem;
+    max-width: 23rem;
     height: 16rem;
-    border-radius: 3rem;
+    border-radius: 1rem;
     background-color: white;
     padding: 2rem;
 }
@@ -82,9 +82,9 @@
 }
 
 .tempThoughOutDay {
-    max-width: 22rem;
+    max-width: 23rem;
     height: auto;
-    border-radius: 3rem;
+    border-radius: 1rem;
     background-color: white;
     padding: 2rem;
 }
@@ -99,4 +99,23 @@
 
 .todayText {
     font-variant-caps: small-caps;
+}
+
+.dayColumn {
+    background-color: rgba(255, 255, 255, 0.447);
+    border-radius: 1rem;
+    margin: .45rem;
+    padding-top: .8rem;
+    max-width: 8.7rem;
+    height: auto;
+}
+
+.navColumns {
+    max-width: auto;
+    height: 3rem;
+}
+
+.weatherIcons {
+    max-width: 2.5rem;
+    height: auto;
 }

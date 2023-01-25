@@ -12,16 +12,25 @@
 </head>
 
 <body class="dayBG">
-    <nav class="navbar bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand">climate.xchange</a>
-            <form class="d-flex" role="search">
-                <input id="userSearch" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
-                <button id="searchBtn" class="btn searchBtn" type="button">Search</button>
-            </form>
+    <nav class="bg-light">
+        <div class="container">
+            <div class="row d-flex justify-content-around text-center">
+                <div class="col-3 navColumns"></div>
+                <div class="col-3 navColumns p-1">
+                    <a class="navbar-brand">climate.xchange</a>
+                </div>
+                <div class="col-3 navColumns p-1">
+                    <form class="d-flex" role="search">
+                        <input id="userSearch" class="form-control me-2" type="text" placeholder="Search"
+                            aria-label="Search">
+                        <button id="searchBtn" class="btn searchBtn" type="button">Search</button>
+                    </form>
+                </div>
+                <div class="col-3 navColumns"></div>
+            </div>
         </div>
     </nav>
-    <div class="container-fluid mt-4">
+    <div class="container-fluid mt-5">
         <div class="row d-flex justify-content-center mainWeatherData">
             <div class="currentTempData">
                 <h4 id="cityName">City Name</h4>
@@ -49,7 +58,7 @@
                         <p>8am</p>
                         <p id="morningTemp">temp</p>
                     </div>
-                    <div class="col-4 d-flex flex-column align-items-center noonText"> 
+                    <div class="col-4 d-flex flex-column align-items-center noonText">
                         <p>noon</p>
                         <p id="noonTemp">temp</p>
                     </div>
@@ -60,6 +69,42 @@
                 </div>
             </div>
         </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="fiveDayForecast">
+                    <div class="row mt-3 d-flex justify-content-center">
+                        <div class="col-1"></div>
+                        <div class="col-2 d-flex flex-column align-items-center dayColumn">
+                            <p id="dateOne">date</p>
+                            <img class="weatherIcons" src="./assets/clouds.svg" alt="">
+                            <p id="dateOneTemp">temp</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column align-items-center dayColumn">
+                            <p id="dateTwo">date</p>
+                            <img class="weatherIcons" src="./assets/clouds.svg" alt="">
+                            <p id="dateTwoTemp">temp</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column align-items-center dayColumn">
+                            <p id="dateThree">date</p>
+                            <img class="weatherIcons" src="./assets/clouds.svg" alt="">
+                            <p id="dateThreeTemp">temp</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column align-items-center dayColumn">
+                            <p id="dateFour">date</p>
+                            <img class="weatherIcons" src="./assets/clouds.svg" alt="">
+                            <p id="dateFourTemp">temp</p>
+                        </div>
+                        <div class="col-2 d-flex flex-column align-items-center dayColumn">
+                            <p id="dateFive">date</p>
+                            <img class="weatherIcons" src="./assets/clouds.svg" alt="">
+                            <p id="dateFiveTemp">temp</p>
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
