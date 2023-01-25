@@ -72,11 +72,15 @@
 }
 
 .currentTempData {
-    max-width: 23rem;
+    max-width: 26rem;
     height: 16rem;
     border-radius: 1rem;
     background-color: white;
     padding: 2rem;
+}
+
+.cityName {
+    letter-spacing: .4rem;
 }
 
 .currentTemp {
@@ -91,8 +95,8 @@
     margin: 0rem;
 }
 
-.tempThoughOutDay {
-    max-width: 23rem;
+.tempThroughOutDay {
+    max-width: 26rem;
     height: auto;
     border-radius: 1rem;
     background-color: white;
@@ -104,7 +108,8 @@
 }
 
 .weatherDescriptionText {
-    font-size: 1rem;
+    font-size: 1.7rem;
+    font-family: 'Philosopher', sans-serif;
 }
 
 .todayText {
@@ -114,12 +119,17 @@
     margin-top: -.8rem;
 }
 
+.todaysDateText {
+    font-size: 1.6rem;
+    letter-spacing: .1rem;
+}
+
 .dayColumn {
     background-color: rgba(255, 255, 255, 0.447);
     border-radius: 1rem;
     margin: .45rem;
     padding-top: .8rem;
-    max-width: 8.7rem;
+    max-width: 9.45rem;
     height: auto;
 }
 
@@ -136,4 +146,11 @@
 .navbar-brand {
     font-size: 2rem;
     font-family: 'Philosopher', sans-serif;
+}
+
+.addToFavesBtn {
+    background-color: rgba(255, 255, 255, 0.747);
+    border: none;
+    border-radius: .5rem;
+    padding: .7rem 3rem .5rem 3rem;
 }
