@@ -104,9 +104,34 @@
         <div class="container-fluid mt-2">
             <div class="row text-center">
                 <div class="col-12 d-flex justify-content-center">
-                    <button id="addBtn" class="addToFavesBtn d-flex flex-row justify-content-center" type="button">
-                      <i class="fa-solid fa-heart"></i><p class="m-0 openFaveText">Open Your Favorite Places</p>
+                    <button id="addBtn" class="addToFavesBtn d-flex flex-row justify-content-center" type="button"data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                        <i class="fa-solid fa-heart"></i>
+                        <p class="m-0 openFaveText">Open Your Favorite Places</p>
                     </button>
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                        aria-labelledby="offcanvasExampleLabel">
+                        <div class="offcanvas-header">
+                            <h6 class="offcanvas-title" id="offcanvasExampleLabel">YOUR FAVORITE CITIES</h6>
+                            <button class="closeBtn" type="button" data-bs-dismiss="offcanvas" aria-label="Close"><i class="fa-regular fa-circle-xmark"></i></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <div>
+                                Some text as placeholder. In real life you can have the elements you have chosen. Like,
+                                text, images, lists, etc.
+                            </div>
+                            <div class="dropdown mt-3">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown">
+                                    Dropdown button
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

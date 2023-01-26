@@ -1,3 +1,10 @@
+// TODO for 1/26/2023
+// Create function that will add cities to list
+// Function to populate list
+// Create a delete function to remove cities from list
+// a button will be called to add a button will be called to remove
+// Find a way to display the correct weather icons according to weather description
+
 import {prod, dev} from './environments.js';
 import {UpdateCurrentTime} from './functions.js';
 
