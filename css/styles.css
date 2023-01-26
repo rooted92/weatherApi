@@ -72,8 +72,8 @@
 }
 
 .currentTempData {
-    max-width: 26rem;
-    height: 16rem;
+    max-width: 25rem;
+    height: auto;
     border-radius: 1rem;
     background-color: white;
     padding: 2rem;
@@ -87,6 +87,7 @@
     font-size: 5rem;
     padding: 0rem;
     font-family: 'Philosopher', sans-serif;
+    border-bottom: dotted 2px black;
 }
 
 .timeText {
@@ -96,7 +97,7 @@
 }
 
 .tempThroughOutDay {
-    max-width: 26rem;
+    max-width: 25rem;
     height: auto;
     border-radius: 1rem;
     background-color: white;
@@ -108,7 +109,7 @@
 }
 
 .weatherDescriptionText {
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     font-family: 'Philosopher', sans-serif;
 }
 
@@ -146,11 +147,40 @@
 .navbar-brand {
     font-size: 2rem;
     font-family: 'Philosopher', sans-serif;
+    font-weight: bold;
+    margin-top: -.3rem;
 }
 
 .addToFavesBtn {
     background-color: rgba(255, 255, 255, 0.747);
     border: none;
-    border-radius: .5rem;
-    padding: .7rem 3rem .5rem 3rem;
+    border-radius: .8rem;
+    padding: .5rem;
+    min-width: 25rem;
+}
+
+.searchBtn {
+  background-color: rgba(86, 43, 226, 0.402);
+  padding-top: .4rem;
+  max-height: 2rem;
+  max-width: 2.5rem;
+  margin-top: .3rem;
+  border-radius: .5rem;
+}
+
+.openFaveText {
+  font-size: .7rem;
+}
+
+.fa-search {
+  color: white;
+}
+
+.fa-heart {
+  margin-right: .7rem;
+}
+
+.form-control {
+  margin-top: .3rem;
+  max-height: 2rem;
 }

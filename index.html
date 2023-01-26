@@ -13,17 +13,18 @@
 
 <body class="dayBG">
     <nav class="bg-light">
-        <div class="container">
-            <div class="row d-flex justify-content-around text-center">
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-between">
                 <div class="col-3 navColumns"></div>
-                <div class="col-3 navColumns p-1">
+                <div class="col-3 navColumns p-1 d-flex justify-content-start">
                     <a class="navbar-brand">climate.xchange</a>
                 </div>
-                <div class="col-3 navColumns p-1">
+                <div class="col-3 navColumns p-1 d-flex justify-content-end">
                     <form class="d-flex" role="search">
-                        <input id="userSearch" class="form-control me-2" type="text" placeholder="Search"
+                        <input id="userSearch" class="form-control me-2" type="text" placeholder="Search for a city"
                             aria-label="Search">
-                        <button id="searchBtn" class="btn searchBtn" type="button"><i class="fa fa-search" aria-hidden="true">Search</i></button>
+                        <button id="searchBtn" class="btn searchBtn" type="button"><i class="fa fa-search"
+                                aria-hidden="true"></i></button>
                     </form>
                 </div>
                 <div class="col-3 navColumns"></div>
@@ -33,7 +34,12 @@
     <div class="container-fluid mt-5">
         <div class="row d-flex justify-content-center mainWeatherData">
             <div class="currentTempData">
-                <h4 id="cityName" class="m-0 cityName">City Name</h4>
+                <div class="row">
+                    <div class="col-12 d-flex flex-row justify-content-between">
+                        <h4 id="cityName" class="m-0 cityName">City Name</h4>
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                </div>
                 <p id="currentTemperature" class="currentTemp">Temp</p>
                 <div class="row">
                     <div class="col-6">
@@ -45,14 +51,14 @@
                 </div>
             </div>
             <div class="tempThroughOutDay">
-                        <div class="row">
-                            <div class="col-6 pt-1">
-                                <p class="todayText">today</p>
-                            </div>
-                            <div class="col-6">
-                                <p id="todaysDate" class="todaysDateText">today's date</p>
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col-6 pt-1">
+                        <p class="todayText">today</p>
+                    </div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <p id="todaysDate" class="todaysDateText">today's date</p>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12 d-flex justify-content-center">
                         <p id="currentTime" class="timeText">time</p>
@@ -97,8 +103,10 @@
         </div>
         <div class="container-fluid mt-2">
             <div class="row text-center">
-                <div class="col-12">
-                    <button id="addBtn" class="addToFavesBtn" type="button">Open Your Favorite Places</button>
+                <div class="col-12 d-flex justify-content-center">
+                    <button id="addBtn" class="addToFavesBtn d-flex flex-row justify-content-center" type="button">
+                      <i class="fa-solid fa-heart"></i><p class="m-0 openFaveText">Open Your Favorite Places</p>
+                    </button>
                 </div>
             </div>
         </div>
@@ -108,6 +116,7 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
     <script src="./scripts/app.js" type="module"></script>
+    <script src="https://kit.fontawesome.com/d3cb6aafa5.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
