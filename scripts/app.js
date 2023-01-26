@@ -4,7 +4,7 @@
 // Create a delete function to remove cities from list
 // a button will be called to add a button will be called to remove
 // Find a way to display the correct weather icons according to weather description
-
+// For the weather icons save the icon code to a variable and then pass in the value of that variable into a url that will 'fetch' the relevant icon and display it accordingly
 import {prod, dev} from './environments.js';
 import {UpdateCurrentTime} from './functions.js';
 
