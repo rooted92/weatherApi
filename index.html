@@ -44,8 +44,7 @@
                 </div>
                 <div class="row">
                     <div id="curWeatherIconHere" class="col-12 d-flex flex-row justify-content-between">
-                        <img id="currentTempImg" class="curTempDataImg"
-                            src="" alt="">
+                        <img id="currentTempImg" class="curTempDataImg" src="" alt="">
                         <p id="currentTemperature" class="currentTemp">Temp</p>
                     </div>
                 </div>
@@ -74,30 +73,40 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="fiveDayForecast">
-                    <div class="row mt-3 d-flex justify-content-center">
+                    <div class="row mt-1 d-flex justify-content-center">
                         <div class="col-1"></div>
-                        <div class="col-2 d-flex flex-column align-items-center dayColumn">
-                            <p id="dateOne">date</p>
+                        <div id="fcColOne" class="col-2 d-flex flex-column align-items-center dayColumn">
+                            <button id="fcDayOne" class="forecastBtns">
+                                <p id="dateOne">date</p>
+                            </button>
                             <img id="dateOneImg" class="weatherIcons" src="" alt="">
                             <p id="dateOneTemp">temp</p>
                         </div>
-                        <div class="col-2 d-flex flex-column align-items-center dayColumn">
-                            <p id="dateTwo">date</p>
+                        <div id="fcColTwo" class="col-2 d-flex flex-column align-items-center dayColumn">
+                            <button id="fcDayTwo" class="forecastBtns">
+                                <p id="dateTwo">date</p>
+                            </button>
                             <img id="dateTwoImg" class="weatherIcons" src="" alt="">
                             <p id="dateTwoTemp">temp</p>
                         </div>
-                        <div class="col-2 d-flex flex-column align-items-center dayColumn">
-                            <p id="dateThree">date</p>
+                        <div id="fcColThree" class="col-2 d-flex flex-column align-items-center dayColumn">
+                            <button id="fcDayThree" class="forecastBtns">
+                                <p id="dateThree">date</p>
+                            </button>
                             <img id="dateThreeImg" class="weatherIcons" src="" alt="">
                             <p id="dateThreeTemp">temp</p>
                         </div>
-                        <div class="col-2 d-flex flex-column align-items-center dayColumn">
-                            <p id="dateFour">date</p>
+                        <div id="fcColFour" class="col-2 d-flex flex-column align-items-center dayColumn">
+                            <button id="fcDayFour" class="forecastBtns">
+                                <p id="dateFour">date</p>
+                            </button>
                             <img id="dateFourImg" class="weatherIcons" src="" alt="">
                             <p id="dateFourTemp">temp</p>
                         </div>
-                        <div class="col-2 d-flex flex-column align-items-center dayColumn">
-                            <p id="dateFive">date</p>
+                        <div id="fcColFive" class="col-2 d-flex flex-column align-items-center dayColumn">
+                            <button id="fcDayFive" class="forecastBtns">
+                                <p id="dateFive">date</p>
+                            </button>
                             <img id="dateFiveImg" class="weatherIcons" src="" alt="">
                             <p id="dateFiveTemp">temp</p>
                         </div>
@@ -106,28 +115,35 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid mt-2">
-            <div class="row text-center">
-                <div class="col-12 d-flex justify-content-center p-0">
-                    <button id="openFavoritesBtn" class="addToFavesBtn d-flex flex-row justify-content-center"
-                        type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
-                        aria-controls="offcanvasExample">
-                        <i class="fa-solid fa-heart openHeartBtn"></i>
-                        <p class="m-0 openFaveText">Open Your Favorite Places</p>
-                    </button>
-                    <div class="offcanvas offcanvas-start  offcanvasBG" tabindex="-1" id="offcanvasExample"
-                        aria-labelledby="offcanvasExampleLabel">
-                        <div class="offcanvas-header">
-                            <h6 class="offcanvas-title" id="offcanvasExampleLabel">YOUR FAVORITE CITIES</h6>
-                            <button class="closeBtn" type="button" data-bs-dismiss="offcanvas" aria-label="Close"><i
-                                    class="fa-regular fa-circle-xmark"></i></button>
-                        </div>
-                        <div id="faveCitiesList" class="offcanvas-body">
-                        </div>
+        <div id="forecastDiv" class="container-fluid mt-1"></div>
+    </div>
+    <div class="container-fluid mt-2">
+        <div class="row text-center">
+            <div class="col-4">
+                <button id="dayMode" class="dayModeBtn d-flex justify-content-start" type="button"></button>
+            </div>
+            <div class="col-4 d-flex justify-content-center p-0">
+                <button id="openFavoritesBtn" class="addToFavesBtn d-flex flex-row justify-content-center" type="button"
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                    <i id="openHeart" class="fa-solid fa-heart openHeartBtn"></i>
+                    <p class="m-0 openFaveText">Open Your Favorite Places</p>
+                </button>
+                <div class="offcanvas offcanvas-start  offcanvasBG" tabindex="-1" id="offcanvasExample"
+                    aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas-header">
+                        <h6 class="offcanvas-title" id="offcanvasExampleLabel">YOUR FAVORITE CITIES</h6>
+                        <button class="closeBtn" type="button" data-bs-dismiss="offcanvas" aria-label="Close"><i
+                                class="fa-regular fa-circle-xmark"></i></button>
+                    </div>
+                    <div id="faveCitiesList" class="offcanvas-body">
                     </div>
                 </div>
             </div>
+            <div class="col-4 d-flex flex-row justify-content-end">
+                <button id="nightMode" class="nightModeBtn" type="button"></button>
+            </div>
         </div>
+    </div>
     </div>
     <div id="changeUnits" class="changeUnitsDiv mt-5">
         <div class="row">

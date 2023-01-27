@@ -1,16 +1,15 @@
 // TODO for 1/27/2023
-//MAKE the pop up divs for when you click on a forecast day***
 //Find another way save city without user input value***
-//switch to night mode
-//Fix the heart btn toggle
-//Toggle between temp units
+//switch to night mode 1
+//Fix the heart btn toggle 2
+//Toggle between temp units 3
 //style fonts (bolder, smaller, etc.)
-//see if you can switch from OWM icons to the client icons (make object)
+//see if you can switch from OWM icons to the client icons (make object) 4
 //... that might be it
 
 
 import { prod, dev } from './environments.js';
-import { UpdateCurrentTime } from './functions.js';
+import { UpdateCurrentTime, CreateForecastDivElment } from './functions.js';
 import { GetFavorites, SaveFavoritesToLocalStorage, RemoveCityFromLocalStorage } from './favoritesStorage.js';
 
 //get local time
@@ -53,6 +52,24 @@ let openFavoritesBtn = document.querySelector('#openFavoritesBtn');
 let faveCitiesList = document.querySelector('#faveCitiesList');
 let currentTime = document.querySelector('#currentTime');//being used in functions.js
 let currentTempImg = document.querySelector('#currentTempImg');
+let forecastDiv = document.getElementById('forecastDiv');//being used in functions.js
+let fcDayOneBtn = document.querySelector('#fcDayOne');
+let fcDayTwoBtn = document.querySelector('#fcDayTwo');
+let fcDayThreeBtn = document.querySelector('#fcDayThree');
+let fcDayFourBtn = document.querySelector('#fcDayFour');
+let fcDayFiveBtn = document.querySelector('#fcDayFive');
+let dayMode = document.querySelector('#dayMode');
+let nightMode = document.querySelector('#nightMode');
+let body = document.querySelector('body');
+let nav = document.querySelector('nav');
+let currentTempDiv = document.querySelector('.currentTempData');
+let tempThoughOutDiv = document.querySelector('.tempThroughOutDay');
+let fcColOne = document.querySelector('#fcColOne');
+let fcColTwo = document.querySelector('#fcColTwo');
+let fcColThree = document.querySelector('#fcColThree');
+let fcColFour = document.querySelector('#fcColFour');
+let fcColFive = document.querySelector('#fcColFive');
+let openHeart = document.querySelector('#openHeart');
 
 let userInput = '';
 let latData, lonData;
@@ -66,20 +83,15 @@ const weatherIconsOWM = {
     "Clouds": "http://openweathermap.org/img/wn/03d@2x.png"
 };
 
-console.log('here is city name before search: ' + cityName.textContent);
-
 searchBtn.addEventListener('click', function () {
     addBtn.innerHTML = '';
     addBtn.innerHTML = '<i class="fa-regular fa-heart"></i>';
     userInput = userSearch.value;
-    console.log('User Input(searchBtn): ' + userInput);
     GetWeatherByCityStateZip(userInput);
 });
 
 addBtn.addEventListener('click', function () {
-    //<-- not the right way to do this...
     faveCitiesList.innerHTML = '';
-    console.log('Here is added city(addBtn): ' + userSearch.value);
     SaveFavoritesToLocalStorage(userSearch.value);
     CreateFavoriteCityElements();
 });
@@ -87,13 +99,39 @@ addBtn.addEventListener('click', function () {
 openFavoritesBtn.addEventListener('click', function () {
     //get local storage
     let localStorageData = GetFavorites();
-    console.log('Here is local storage(openFavoritesBtn):' + localStorageData);
+});
+dayMode.addEventListener('click',function(){
+    body.className = 'dayBG';
+    nav.className = 'bg-light';
+    currentTempDiv.className = 'currentTempData';
+    tempThoughOutDiv.className = 'tempThroughOutDay';
+    fcColOne.className = 'dayColumn';
+    fcColTwo.className = 'dayColumn';
+    fcColThree.className = 'dayColumn';
+    fcColFour.className = 'dayColumn';
+    fcColFive.className = 'dayColumn';
+    openFavoritesBtn.className = 'addToFavesBtn d-flex flex-row justify-content-center';
+    openHeart.className = 'openHeartBtn';
+    faveCitiesList.className = 'offcanvasBG';
+});
+nightMode.addEventListener('click', function(){
+    body.className = 'nightBG';
+    nav.className = 'bg-dark';
+    currentTempDiv.className = 'currentTempDataNight'
+    tempThoughOutDiv.className = 'tempThroughOutNight';
+    fcColOne.className = 'nightColumn';
+    fcColTwo.className = 'nightColumn';
+    fcColThree.className = 'nightColumn';
+    fcColFour.className = 'nightColumn';
+    fcColFive.className = 'nightColumn';
+    openFavoritesBtn.className = 'addToFavesBtnNight d-flex flex-row justify-content-center';
+    openHeart.className = 'openHeartBtnNight';
+    faveCitiesList.className = 'offcanvasBGNight';
 });
 
 async function GetWeatherByCityStateZip(input) {
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input}&units=imperial` + apiKey);
     const data = await promise.json();
-    console.log(data);
     latData = data.coord.lat;
     lonData = data.coord.lon;
     cityName.textContent = `${data.name.toUpperCase()}`;
@@ -102,8 +140,7 @@ async function GetWeatherByCityStateZip(input) {
     highLowTemps.innerHTML = `H:${Math.floor(data.main.temp_max)}&#8457; L:${Math.floor(data.main.temp_min)}&#8457;`;
     let keys = Object.keys(weatherIconsOWM);//turns object into array
     let weatherCondition = data.weather[0].main;//weather condition to check if it's inside array
-    if(keys.includes(weatherCondition))
-    {
+    if (keys.includes(weatherCondition)) {
         currentTempImg.src = `${weatherIconsOWM[weatherCondition]}`;
     }
 
@@ -118,9 +155,28 @@ async function GetWeatherForecast(lat, lon) {
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial` + apiKey);
     const data = await promise.json();
 
-    console.log('weather forecast data: below');
-    console.log(data);
-    console.log(data.list[3].weather.main);
+    let isOpened = true;
+    fcDayOneBtn.addEventListener('click', function () {
+        CreateForecastDivElment(data.list[3].main.humidity, data.list[3].main.pressure, data.list[3].wind.gust, data.list[3].wind.speed, data.list[3].dt_txt, data.list[3].weather[0].description, isOpened);
+        isOpened = !isOpened;
+    });
+    fcDayTwoBtn.addEventListener('click', function () {
+        CreateForecastDivElment(data.list[11].main.humidity, data.list[11].main.pressure, data.list[11].wind.gust, data.list[11].wind.speed, data.list[11].dt_txt, data.list[11].weather[0].description, isOpened);
+        isOpened = !isOpened;
+    });
+    fcDayThreeBtn.addEventListener('click', function () {
+        CreateForecastDivElment(data.list[19].main.humidity, data.list[19].main.pressure, data.list[19].wind.gust, data.list[19].wind.speed, data.list[19].dt_txt, data.list[19].weather[0].description, isOpened);
+        isOpened = !isOpened;
+    });
+    fcDayFourBtn.addEventListener('click', function () {
+        CreateForecastDivElment(data.list[27].main.humidity, data.list[27].main.pressure, data.list[27].wind.gust, data.list[27].wind.speed, data.list[27].dt_txt, data.list[27].weather[0].description, isOpened);
+        isOpened = !isOpened;
+    });
+    fcDayFiveBtn.addEventListener('click', function () {
+        CreateForecastDivElment(data.list[35].main.humidity, data.list[35].main.pressure, data.list[35].wind.gust, data.list[35].wind.speed, data.list[35].dt_txt, data.list[35].weather[0].description, isOpened);
+        isOpened = !isOpened;
+    });
+
     //figure out a way to get the temp of the day for each day...
     for (let i = 0; i < data.list.length; i++) {
         const dt_txt = data.list[i].dt_txt;
@@ -130,50 +186,43 @@ async function GetWeatherForecast(lat, lon) {
         const month = date.getMonth() + 1;//months are indexed so add 1 cuz they start at 0
         // Use the values of dayOfWeek, day, month and year to build the final string 
         const finalString = `${dayOfWeek.toUpperCase()} ${month}/${day}`;// you can use the finalString to display date
-        console.log(finalString);
 
-        
         //check for weather conditions to display correct icon from array
         let keys = Object.keys(weatherIconsOWM);
         let weatherCondition = data.list[i].weather[0].main;
-        
+
         if (i === 3) {
             dateOne.textContent = `${finalString}`;
             dateOneTemp.innerHTML = `${Math.floor(data.list[i].main.temp_max)}&#8457; | ${Math.floor(data.list[i].main.temp_min)}&#8457;`;
-            if(keys.includes(weatherCondition))
-            {
+            if (keys.includes(weatherCondition)) {
                 dateOneImg.src = weatherIconsOWM[weatherCondition];
             }
         }
         else if (i === 11) {
             dateTwo.textContent = `${finalString}`;
             dateTwoTemp.innerHTML = `${Math.floor(data.list[i].main.temp_max)}&#8457; | ${Math.floor(data.list[i].main.temp_min)}&#8457;`;
-            if(keys.includes(weatherCondition))
-            {
+            if (keys.includes(weatherCondition)) {
                 dateTwoImg.src = weatherIconsOWM[weatherCondition];
             }
         }
         else if (i === 19) {
             dateThree.textContent = `${finalString}`;
             dateThreeTemp.innerHTML = `${Math.floor(data.list[i].main.temp_max)}&#8457; | ${Math.floor(data.list[i].main.temp_min)}&#8457;`;
-            if(keys.includes(weatherCondition))
-            {
+            if (keys.includes(weatherCondition)) {
                 dateThreeImg.src = weatherIconsOWM[weatherCondition];
             }
         }
         else if (i === 27) {
             dateFour.textContent = `${finalString}`;
             dateFourTemp.innerHTML = `${Math.floor(data.list[i].main.temp_max)}&#8457; | ${Math.floor(data.list[i].main.temp_min)}&#8457;`;
-            if(keys.includes(weatherCondition))
-            {
+            if (keys.includes(weatherCondition)) {
                 dateFourImg.src = weatherIconsOWM[weatherCondition];
             }
         }
         else if (i === 35) {
             dateFive.textContent = `${finalString}`;
             dateFiveTemp.innerHTML = `${Math.floor(data.list[i].main.temp_max)}&#8457; | ${Math.floor(data.list[i].main.temp_min)}&#8457;`;
-            if(keys.includes(weatherCondition))
-            {
+            if (keys.includes(weatherCondition)) {
                 dateFiveImg.src = weatherIconsOWM[weatherCondition];
             }
         }
@@ -207,26 +256,15 @@ async function DisplayCurrentWeather(userLat, userLon) {
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${userLat}&lon=${userLon}&units=imperial` + apiKey);
     const data = await promise.json();
 
-    console.log('Data from DisplayCurrentWeather: ' + data);
-    console.log(data);
-    console.log(data.dt);
     let convertTime = new Date(Date.UTC(data.dt));
-    console.log('convertime variable: ' + convertTime);
-    console.log('converted time in displayweather: ' + convertTime.toUTCString());
     let localStorageData = GetFavorites();
-    console.log('GetFavorites() inside DisplayWeather: ' + localStorageData);
     cityName.textContent = `${data.name.toUpperCase()}`;
     localStorageData.push(`${data.name}`);
-    console.log('GetFavorites() inside DisplayWeather: ' + localStorageData);
     currentTemperature.innerHTML = `${Math.floor(data.main.temp)}&#8457;`;
     weatherDescription.textContent = `${data.weather[0].description}`;
     highLowTemps.innerHTML = `H:${Math.floor(data.main.temp_max)} L:${Math.floor(data.main.temp_min)}`;
     //**** Important! checkout using Date.UTC */
     let currentDate = new Date();
-    console.log(currentDate);
-    let jsonDate = currentDate.toJSON();
-    console.log('this is jsonDate: ' + jsonDate);
-    // console.log(weekday);
     const dayOfWeek = currentDate.toLocaleString('default', { weekday: 'long' });
     let month = currentDate.getMonth() + 1;
     let day = currentDate.getDate();
@@ -235,15 +273,13 @@ async function DisplayCurrentWeather(userLat, userLon) {
 
     let keys = Object.keys(weatherIconsOWM);
     let weatherCondition = data.weather[0].main;
-    if(keys.includes(weatherCondition))
-    {
+    if (keys.includes(weatherCondition)) {
         currentTempImg.src = weatherIconsOWM[weatherCondition];
     }
 }
 
 const CreateFavoriteCityElements = () => {
     let favorites = GetFavorites();
-    console.log('Favorites List: ' + favorites);
 
     favorites.map(city => {
         let p = document.createElement('p');

@@ -682,7 +682,7 @@
  .fadeIn,
  .fadeOut {
      animation-timing-function: ease;
-     animation-duration: 2s
+     animation-duration: 1s
  }
  
  @keyframes fadeIn {

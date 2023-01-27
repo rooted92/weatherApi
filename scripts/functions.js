@@ -11,4 +11,72 @@ const UpdateCurrentTime = () => {
     //add isCurrentTime = false here... maybe this is where you needed to put it
 }
 
-export {UpdateCurrentTime}
+// Create function that will create a div when one of the forecast divs is clicked
+const CreateForecastDivElment = (humidity, pressure, gust, speed, dateTimeText, weather, bool) => {
+    const date = new Date(dateTimeText);
+    const dayOfWeek = date.toLocaleString('default', { weekday: 'long' }).toUpperCase();
+
+    let humidityP = document.createElement('p');
+    humidityP.id = 'humidity';
+    humidityP.textContent = `Humidity: ${humidity}`;
+    let pressureP = document.createElement('p');
+    pressureP.id = 'pressure';
+    pressureP.textContent = `Pressure: ${pressure}`;
+    let windP = document.createElement('p');
+    windP.id = 'wind';
+    windP.textContent = `Wind - gust:  ${gust}/speed:  ${speed}`;
+
+    let firstInnerCol = document.createElement('div');
+    firstInnerCol.className = 'col-12';
+    firstInnerCol.appendChild(humidityP);
+    firstInnerCol.appendChild(pressureP);
+    firstInnerCol.appendChild(windP);
+
+    let moreDataDiv = document.createElement('div');
+    moreDataDiv.className = 'moreDataDiv d-flex justify-content-evenly';
+    moreDataDiv.appendChild(firstInnerCol);
+
+    let detailsText = document.createElement('p');
+    detailsText.id = 'detailsText';
+    detailsText.textContent = 'WEATHER DETAILS';
+
+    let secondOuterCol = document.createElement('div');
+    secondOuterCol.className = 'col-6';
+    secondOuterCol.appendChild(detailsText);
+    secondOuterCol.appendChild(moreDataDiv);
+
+    let longDayP = document.createElement('p');
+    longDayP.id = 'longDayText';
+    longDayP.className = 'longDayForecastText';
+    longDayP.textContent = `${dayOfWeek}`;
+
+    let hr = document.createElement('hr');
+
+    let weatherDscrptnP = document.createElement('p');
+    weatherDscrptnP.id = 'weatherDscrptn';
+    weatherDscrptnP.textContent = weather
+
+    let firstOuterCol = document.createElement('div');
+    firstOuterCol.className = 'col-6';
+    firstOuterCol.appendChild(longDayP);
+    firstOuterCol.appendChild(hr);
+    firstOuterCol.appendChild(weatherDscrptnP);
+
+    let row = document.createElement('div');
+    row.className = 'row';
+    row.appendChild(firstOuterCol);
+    row.appendChild(secondOuterCol);
+    
+    if(bool)
+    {
+        forecastDiv.appendChild(row);
+        forecastDiv.className = 'forecastData fadeIn';
+    }
+    else
+    {
+        forecastDiv.innerHTML = '';
+        forecastDiv.className = '';
+    }
+}
+
+export { UpdateCurrentTime, CreateForecastDivElment }
