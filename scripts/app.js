@@ -1,9 +1,13 @@
 // TODO for 1/27/2023
-// Find a way to display the correct weather icons according to weather description
-// For the weather icons save the icon code to a variable and then pass in the value of that variable into a url that will 'fetch' the relevant icon and display it accordingly
-//Instead make an object and have key:value pairs for each icon according to weather description
-//when you do an add to favorites function add a paramenter to save input from the getweatherforecast funcitons
-//Find another way save city without user input value
+//MAKE the pop up divs for when you click on a forecast day***
+//Find another way save city without user input value***
+//switch to night mode
+//Fix the heart btn toggle
+//Toggle between temp units
+//style fonts (bolder, smaller, etc.)
+//see if you can switch from OWM icons to the client icons (make object)
+//... that might be it
+
 
 import { prod, dev } from './environments.js';
 import { UpdateCurrentTime } from './functions.js';
@@ -286,5 +290,5 @@ const CreateFavoriteCityElements = () => {
     });
 }
 
-//populate saved cities
+//populate saved cities when page loads
 CreateFavoriteCityElements();
