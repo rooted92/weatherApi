@@ -8,6 +8,7 @@ const UpdateCurrentTime = () => {
     hours = hours ? hours : 12; //ternary operator to check if housrs is 0 if it is then it will return 12 to keep the 12 hour format if it's not then it will just return the same hour
     minutes = minutes < 10 ? '0' + minutes : minutes;
     currentTime.textContent = `${hours}:${minutes}${ampm}`;
+    //add isCurrentTime = false here... maybe this is where you needed to put it
 }
 
 export {UpdateCurrentTime}
