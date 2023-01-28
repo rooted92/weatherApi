@@ -9,11 +9,12 @@
 
 
 import { prod, dev } from './environments.js';
-import { UpdateCurrentTime, CreateForecastDivElment } from './functions.js';
+import { UpdateCurrentTime, CreateForecastDivElment, SetTime, GetLocalTime } from './functions.js';
 import { GetFavorites, SaveFavoritesToLocalStorage, RemoveCityFromLocalStorage } from './favoritesStorage.js';
 
 //get local time
-setInterval(UpdateCurrentTime, 1000);//updates time every second
+let currentInterval;
+currentInterval = setInterval(UpdateCurrentTime, 1000);//updates time every second
 
 //hide api key code
 let apiKey = '&appid=';
@@ -100,7 +101,7 @@ openFavoritesBtn.addEventListener('click', function () {
     //get local storage
     let localStorageData = GetFavorites();
 });
-dayMode.addEventListener('click',function(){
+dayMode.addEventListener('click', function () {
     body.className = 'dayBG';
     nav.className = 'bg-light';
     currentTempDiv.className = 'currentTempData';
@@ -114,7 +115,7 @@ dayMode.addEventListener('click',function(){
     openHeart.className = 'openHeartBtn';
     faveCitiesList.className = 'offcanvasBG';
 });
-nightMode.addEventListener('click', function(){
+nightMode.addEventListener('click', function () {
     body.className = 'nightBG';
     nav.className = 'bg-dark';
     currentTempDiv.className = 'currentTempDataNight'
@@ -132,6 +133,29 @@ nightMode.addEventListener('click', function(){
 async function GetWeatherByCityStateZip(input) {
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input}&units=imperial` + apiKey);
     const data = await promise.json();
+
+    console.log('data in weatherbysearch below');
+    console.log('unix time: ' + data.dt);
+    console.log(data);
+    let unixTimeStamp = new Date(data.dt * 1000);
+    let localDateString = unixTimeStamp.toUTCString();
+    console.log('toUTCString value: ' + localDateString);
+    let formattedUnix = unixTimeStamp.toLocaleDateString('default', { weekday: 'short', month: 'numeric', day: 'numeric', year: 'numeric' })
+    console.log('here is formatted unix time stame! ' + formattedUnix);
+    let unversalTime = new Date().getTime();
+    let localDateTime = new Date(unversalTime + (data.timezone * 1000));
+    console.log('Local time: ' + localDateTime);
+    let formatLocalTime = localDateTime.toLocaleDateString('default', { weekday: 'long', month: 'numeric', day: 'numeric', year: 'numeric' });
+    console.log(`Formatted local date in ${data.name}: ` + formatLocalTime);
+    let hours = localDateTime.getHours();
+    console.log('Local hours: ' + hours);
+    let minutes = localDateTime.getMinutes();
+    console.log('Local minutes: ' + minutes);
+    let ampm = hours >= 12 ? 'PM' : 'AM';//checks if hours is greater than or equal to twelve if it is PM if not it is AM
+    hours = hours % 12;//turns hours to 0
+    hours = hours ? hours : 12; //ternary operator to check if housrs is 0 if it is then it will return 12 to keep the 12 hour format if it's not then it will just return the same hour
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    console.log(`Final format for time in ${data.name}: ${hours}:${minutes}${ampm}`)
     latData = data.coord.lat;
     lonData = data.coord.lon;
     cityName.textContent = `${data.name.toUpperCase()}`;
@@ -143,6 +167,13 @@ async function GetWeatherByCityStateZip(input) {
     if (keys.includes(weatherCondition)) {
         currentTempImg.src = `${weatherIconsOWM[weatherCondition]}`;
     }
+    
+    // GetLocalTime(data.timzone); <-- try and fix this function later
+    todaysDate.textContent = formatLocalTime;
+    clearInterval(currentInterval);
+    currentInterval = setInterval(() => {
+        currentTime.textContent = `${hours}:${minutes}${ampm}`;
+    }, 1000);
 
     GetWeatherForecast(latData, lonData);
 }
@@ -256,7 +287,11 @@ async function DisplayCurrentWeather(userLat, userLon) {
     const promise = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${userLat}&lon=${userLon}&units=imperial` + apiKey);
     const data = await promise.json();
 
-    let convertTime = new Date(Date.UTC(data.dt));
+    let convertTime = new Date(data.dt * 1000);
+    let formattedTime = convertTime.toLocaleDateString('en-US', { weekday: 'short', month: 'numeric', day: 'numeric', year: 'numeric' });
+    console.log('Time has been formatted! ' + formattedTime);
+    console.log('data in current weather below');
+    console.log(data);
     let localStorageData = GetFavorites();
     cityName.textContent = `${data.name.toUpperCase()}`;
     localStorageData.push(`${data.name}`);

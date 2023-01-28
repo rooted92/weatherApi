@@ -11,6 +11,23 @@ const UpdateCurrentTime = () => {
     //add isCurrentTime = false here... maybe this is where you needed to put it
 }
 
+const SetTime = (interval, func) => {
+    clearInterval(interval);
+    interval = setInterval(func, 1000);
+}
+
+const GetLocalTime = (timezone) => {
+    let UTC = new Date().getTime();
+    let localTime = new Date(UTC + (timezone * 1000));
+    let hours = localTime.getHours();
+    let minutes = localTime.getMinutes();
+    let ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    currentTime.textContent = `${hours}:${minutes}${ampm}`;
+}
+
 // Create function that will create a div when one of the forecast divs is clicked
 const CreateForecastDivElment = (humidity, pressure, gust, speed, dateTimeText, weather, bool) => {
     const date = new Date(dateTimeText);
@@ -79,4 +96,4 @@ const CreateForecastDivElment = (humidity, pressure, gust, speed, dateTimeText, 
     }
 }
 
-export { UpdateCurrentTime, CreateForecastDivElment }
+export { UpdateCurrentTime, CreateForecastDivElment, SetTime, GetLocalTime }

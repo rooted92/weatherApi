@@ -320,10 +320,10 @@
 .forecastData {
   max-width: 51rem;
   min-height: 15rem;
-  background-color: rgba(255, 255, 255, 0.756);
+  background-color: rgba(255, 255, 255, 0.85);
   border-radius: .8rem;
   padding: 2rem;
-  margin-left: 18.8rem;
+  margin-left: 13.2rem;
 }
 
 .forecastBtns {
